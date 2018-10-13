@@ -158,6 +158,10 @@ PRODUCT_PACKAGES += \
     memtrack.sdm660 \
     libgenlock
 
+# Doze
+PRODUCT_PACKAGES += \
+    Zenmotions
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
@@ -254,7 +258,7 @@ PRODUCT_PACKAGES += \
 
 # LiveDisplay native
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-sdm
+    vendor.aosp.livedisplay@1.0-service-sdm
 
 # Low power Whitelist
 PRODUCT_COPY_FILES += \
@@ -326,7 +330,7 @@ PRODUCT_PACKAGES += \
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+    $(LOCAL_PATH)/overlay-aosp
 
 # Power
 PRODUCT_PACKAGES += \
@@ -450,6 +454,10 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
 	android.hardware.usb@1.0-service.basic
+
+# Vendor security patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.aosp.build.vendor_security_patch=2018-08-01
 
 # Vendor properties
 -include $(LOCAL_PATH)/vendor_prop.mk

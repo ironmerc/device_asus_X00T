@@ -199,7 +199,7 @@ TARGET_PROVIDES_KEYMASTER := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Lineage Hardware
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(DEVICE_PATH)/lineagehw|**/*.java
+JAVA_SOURCE_OVERLAYS := org.aospos.hardware|$(DEVICE_PATH)/aosphw|**/*.java
 
 # Media
 TARGET_USES_MEDIA_EXTENSIONS := true
