@@ -32,13 +32,7 @@ import java.io.File;
 public final class KernelControl {
 
     private static String GESTURE_PATH = "/sys/kernel/touchpanel/gesture_node";
-
     public static final String SLIDER_SWAP_NODE = "/proc/s1302/key_rep";
-
-
-    private static String[] GESTURE_CONTROL_NODES = {
-            GESTURE_PATH
-    };
 
     private KernelControl() {
         // this class is not supposed to be instantiated
@@ -48,11 +42,9 @@ public final class KernelControl {
      * Enable or disable gesture control.
      */
     public static void enableGestures(boolean enable) {
-        for (int i = 0; i < GESTURE_CONTROL_NODES.length; i++) {
-            if (new File(GESTURE_CONTROL_NODES[i]).exists()) {
-                FileUtils.writeLine(GESTURE_CONTROL_NODES[i], enable ? "1" : "0");
+            if (new File(GESTURE_PATH).exists()) {
+                FileUtils.writeLine(GESTURE_PATH, enable ? "1" : "0");
             }
-        }
     }
 
     /**

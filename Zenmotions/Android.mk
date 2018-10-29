@@ -44,7 +44,6 @@ LOCAL_USE_AAPT2 := true
 
 LOCAL_PROGUARD_ENABLED := disabled
 LOCAL_DEX_PREOPT := false
-LOCAL_MODULE_PATH := $(TARGET_OUT)/app
 LOCAL_PRIVATE_PLATFORM_APIS := true
 
 include frameworks/base/packages/SettingsLib/common.mk

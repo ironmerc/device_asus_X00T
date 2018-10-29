@@ -43,7 +43,7 @@ import android.service.notification.ZenModeConfig;
 import com.asus.zenmotions.settings.DeviceSettings;
 import com.asus.zenmotions.settings.ScreenOffGesture;
 import android.os.UserHandle;
-import com.android.internal.os.DeviceKeyHandler;
+import com.android.internal.os.AlternativeDeviceKeyHandler;
 import com.android.internal.util.ArrayUtils;
 import com.asus.zenmotions.util.ActionConstants;
 import com.asus.zenmotions.util.Action;
@@ -51,7 +51,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
 
-public class KeyHandler implements DeviceKeyHandler {
+public class KeyHandler implements AlternativeDeviceKeyHandler {
 
     private static final String TAG = KeyHandler.class.getSimpleName();
     private static final int GESTURE_REQUEST = 1;
@@ -65,21 +65,29 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_E_SCANCODE = 250;
     private static final int GESTURE_S_SCANCODE = 251;
     private static final int GESTURE_V_SCANCODE = 252;
-    private static final int GESTURE_Z_SCANCODE = 254;
     private static final int GESTURE_W_SCANCODE = 253;
+    private static final int GESTURE_Z_SCANCODE = 254;
+    private static final int GESTURE_SWIPE_UP = 255;
+    private static final int GESTURE_SWIPE_DOWN = 256;
+    private static final int GESTURE_SWIPE_LEFT = 257;
+    private static final int GESTURE_SWIPE_RIGHT = 258;
 
     // Slider
      private static final int KEYCODE_SLIDER_TOP = 601;
      private static final int KEYCODE_SLIDER_MIDDLE = 602;
      private static final int KEYCODE_SLIDER_BOTTOM = 603;
      private static final int KEY_DOUBLE_TAP = 143;
-    private static final int[] sSupportedGestures = new int[]{
+     private static final int[] sSupportedGestures = new int[]{
         GESTURE_C_SCANCODE,
         GESTURE_E_SCANCODE,
         GESTURE_V_SCANCODE,
         GESTURE_W_SCANCODE,
         GESTURE_S_SCANCODE,
         GESTURE_Z_SCANCODE,
+	GESTURE_SWIPE_UP,
+	GESTURE_SWIPE_DOWN,
+	GESTURE_SWIPE_LEFT,
+	GESTURE_SWIPE_RIGHT,
         KEYCODE_SLIDER_TOP,
         KEYCODE_SLIDER_MIDDLE,
         KEYCODE_SLIDER_BOTTOM
@@ -93,6 +101,10 @@ public class KeyHandler implements DeviceKeyHandler {
         GESTURE_W_SCANCODE,
         GESTURE_S_SCANCODE,
         GESTURE_Z_SCANCODE,
+	GESTURE_SWIPE_UP,
+	GESTURE_SWIPE_DOWN,
+	GESTURE_SWIPE_LEFT,
+	GESTURE_SWIPE_RIGHT,
         KEY_DOUBLE_TAP
      };
 
@@ -214,6 +226,30 @@ public class KeyHandler implements DeviceKeyHandler {
                         ActionConstants.ACTION_MEDIA_NEXT);
                         doHapticFeedback();
                 break;
+			case GESTURE_SWIPE_UP:
+                action = getGestureSharedPreferences()
+                        .getString(ScreenOffGesture.PREF_GESTURE_UP,
+                        ActionConstants.ACTION_WAKE_DEVICE);
+                        doHapticFeedback();
+                break;
+            case GESTURE_SWIPE_DOWN:
+                action = getGestureSharedPreferences()
+                        .getString(ScreenOffGesture.PREF_GESTURE_DOWN,
+                        ActionConstants.ACTION_VIB_SILENT);
+                        doHapticFeedback();
+                break;
+            case GESTURE_SWIPE_LEFT:
+                action = getGestureSharedPreferences()
+                        .getString(ScreenOffGesture.PREF_GESTURE_LEFT,
+                        ActionConstants.ACTION_MEDIA_PREVIOUS);
+                        doHapticFeedback();
+                break;
+            case GESTURE_SWIPE_RIGHT:
+                action = getGestureSharedPreferences()
+                        .getString(ScreenOffGesture.PREF_GESTURE_RIGHT,
+                        ActionConstants.ACTION_MEDIA_NEXT);
+                        doHapticFeedback();
+                break;
     }
 
             if (action == null || action != null && action.equals(ActionConstants.ACTION_NULL)) {
@@ -264,7 +300,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
         void observe() {
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DEVICE_PROXI_CHECK_ENABLED),
+                    Settings.System.CUSTOM_DEVICE_PROXI_CHECK_ENABLED),
                     false, this);
             update();
         }
@@ -276,7 +312,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
         public void update() {
             mUseProxiCheck = Settings.System.getIntForUser(
-                    mContext.getContentResolver(), Settings.System.DEVICE_PROXI_CHECK_ENABLED, 1,
+                    mContext.getContentResolver(), Settings.System.CUSTOM_DEVICE_PROXI_CHECK_ENABLED, 1,
                     UserHandle.USER_CURRENT) == 1;
         }
 }
@@ -308,7 +344,7 @@ public class KeyHandler implements DeviceKeyHandler {
             } else if (isSliderModeSupported) {
             if (DEBUG) Log.i(TAG, "scanCode=" + event.getScanCode());
            switch(event.getScanCode()) {
-       case KEYCODE_SLIDER_TOP:
+        case KEYCODE_SLIDER_TOP:
             mCurrentPosition = KEYCODE_SLIDER_TOP; 
             Log.i(TAG, "KEYCODE_SLIDER_TOP");
             mHandler.postDelayed(new Runnable() {
