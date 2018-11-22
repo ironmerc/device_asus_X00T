@@ -25,10 +25,16 @@
     <string name="screen_off_gesture_title">Zenmotions</string>
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>
-    <string name="gestures_dashboard_summary">Zenmotion gestures for Zenfone</string>
+    <string name="gestures_dashboard_summary">Awesome screen-off gestures</string>
     <string name="enable_gestures_title">Enable gestures</string>
     <string name="enable_gestures_summary">Enable screen off gestures</string>
     <string name="gestures_title">Gestures</string>
+
+    <string name="zenmotions">Zenmotions</string>
+    <string name="zenmotions_summary">Gestures and Tweaks for Zenfone</string>
+    <string name="gestures">Gestures</string>
+    <string name="screen_off_gestures">Screen-off gestures</string>
+    <string name="gesture_double_tap_title">Gesture Double Tap</string>
 
     <string name="gesture_z_title">Gesture Z</string>	
     <string name="gesture_s_title">Gesture S</string>
@@ -140,7 +146,8 @@
     <string name="touchscreen_gesture_haptic_feedback_summary">Vibrate when a touchscreen gesture is detected</string>
 
     <!-- Kcal -->
-    <string name="kcal_title">Display color</string>
+    <string name="kcal">Display</string>
+    <string name="kcal_title">Display color control</string>
     <string name="kcal_summary">Display color calibration using KCAL</string>
     <string name="kcal_enabled_title">Enable KCAL</string>
     <string name="kcal_enabled_summary">Turn on display calibration using KCAL</string>
