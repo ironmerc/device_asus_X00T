@@ -34,8 +34,6 @@
     <string name="zenmotions_summary">Gestures and Tweaks for Zenfone</string>
     <string name="gestures">Gestures</string>
     <string name="screen_off_gestures">Screen-off gestures</string>
-    <string name="gesture_double_tap_title">Gesture Double Tap</string>
-
     <string name="gesture_z_title">Gesture Z</string>	
     <string name="gesture_s_title">Gesture S</string>
     <string name="gesture_v_title">Gesture V</string>
@@ -46,8 +44,7 @@
     <string name="gesture_down_title">Gesture Swipe Down</string>
     <string name="gesture_left_title">Gesture Swipe Left</string>
     <string name="gesture_right_title">Gesture Swipe Right</string>
-
-   <string name="gesture_double_tap_title">Double tap</string>
+    <string name="gesture_double_tap_title">Double tap</string>
 
      <!-- Notification slider -->
     <string name="notification_slider">Notification slider</string>

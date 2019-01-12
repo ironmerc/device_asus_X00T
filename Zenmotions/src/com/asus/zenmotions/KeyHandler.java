@@ -351,7 +351,6 @@ public class KeyHandler implements AlternativeDeviceKeyHandler {
                     @Override
                     public void run() {
                         if (mCurrentPosition != KEYCODE_SLIDER_TOP) return;
-            doHandleSliderAction(0);
                     }
                 }, 250);
             return true;
@@ -362,8 +361,7 @@ public class KeyHandler implements AlternativeDeviceKeyHandler {
                     @Override
                     public void run() {
                         if (mCurrentPosition != KEYCODE_SLIDER_MIDDLE) return;
-            doHandleSliderAction(1);
-                    }
+                  }
                 }, 50);
             return true;
         case KEYCODE_SLIDER_BOTTOM:
@@ -373,7 +371,6 @@ public class KeyHandler implements AlternativeDeviceKeyHandler {
                     @Override
                     public void run() {
                         if (mCurrentPosition != KEYCODE_SLIDER_BOTTOM) return;
-            doHandleSliderAction(2);
                     }
                 }, 50);
             return true;
@@ -410,30 +407,6 @@ public class KeyHandler implements AlternativeDeviceKeyHandler {
         }
         return 0;
     }
-
-    private void doHandleSliderAction(int position) {
-        int action = getSliderAction(position);
-        if ( action == 0) {
-            mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
-            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
-        } else if (action == 1) {
-            mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
-            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
-        } else if (action == 2) {
-            mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
-            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
-        } else if (action == 3) {
-            mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
-        } else if (action == 4) {
-            mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
-        }
-          else if (action == 5) {
-            mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
-            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
-        }
-   }
-
-
 
   @Override
     public boolean isDisabledKeyEvent(KeyEvent event) {
