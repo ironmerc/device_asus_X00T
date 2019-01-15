@@ -45,8 +45,11 @@ import android.preference.ListPreference;
 import com.asus.zenmotions.R;
 
 public class zenmotions extends PreferenceActivity implements OnPreferenceChangeListener {
-     private static final boolean DEBUG = true;
-     private static final String TAG = "Zenmotions";
+    private static final boolean DEBUG = true;
+    private static final String TAG = "Zenmotions";
+
+    public static final String KEY_VIBSTRENGTH = "vib_strength";
+    private VibratorStrengthPreference mVibratorStrength;
 
     private Preference mKcalPref;
     private Preference mAmbientPref;
@@ -59,36 +62,40 @@ public class zenmotions extends PreferenceActivity implements OnPreferenceChange
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.zenmotions);
         mGesturesPref = findPreference("zenmotions");
-                mGesturesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                     @Override
-                     public boolean onPreferenceClick(Preference preference) {
-                         Intent intent = new Intent(getApplicationContext(), ScreenOffGestureSettings.class);
-                         startActivity(intent);
-                         return true;
-                     }
-                });
-	mAmbientPref = findPreference("ambient_display_gestures");
-               mAmbientPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                     @Override
-                     public boolean onPreferenceClick(Preference preference) {
-                         Intent intent = new Intent(getApplicationContext(), TouchscreenGesturePreferenceActivity.class);
-                         startActivity(intent);
-                         return true;
-                     }
-                });
-	mKcalPref = findPreference("kcal");
-                mKcalPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                     @Override
-                     public boolean onPreferenceClick(Preference preference) {
-                         Intent intent = new Intent(getApplicationContext(), DisplayCalibration.class);
-                         startActivity(intent);
-                         return true;
-                     }
-                });
+        mGesturesPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(getApplicationContext(), ScreenOffGestureSettings.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+        mAmbientPref = findPreference("ambient_display_gestures");
+        mAmbientPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(getApplicationContext(), TouchscreenGesturePreferenceActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+        mKcalPref = findPreference("kcal");
+        mKcalPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(getApplicationContext(), DisplayCalibration.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+        mVibratorStrength = (VibratorStrengthPreference) findPreference(KEY_VIBSTRENGTH);
+        if (mVibratorStrength != null) {
+            mVibratorStrength.setEnabled(VibratorStrengthPreference.isSupported());
+        }
         mContext = getApplicationContext();
 
 
-}
+    }
 
     @Override
     protected void onResume() {
