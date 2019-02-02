@@ -281,3 +281,8 @@ WIFI_DRIVER_OPERSTATE_PATH := "/sys/class/net/wlan0/operstate"
 
 # inherit from the proprietary version
 -include vendor/asus/X00T/BoardConfigVendor.mk
+
+#HALS
+TARGET_QCOM_DISPLAY_VARIANT := caf-sdm660
+TARGET_QCOM_MEDIA_VARIANT := caf-sdm660
+TARGET_QCOM_AUDIO_VARIANT := caf-sdm660
